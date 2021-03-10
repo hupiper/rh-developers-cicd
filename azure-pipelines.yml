@@ -1,0 +1,20 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+jobs:
+- job: myjob
+  displayName: MyJob
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  # Install oc so that it can be used within a 'script' or bash 'task'
+  - task: oc-setup@2
+    inputs:
+      openshiftService: 'My Openshift'
+      version: '3.11.154'
+# A script task making use of 'oc'
+  - script: |
+      oc new-project my-project
+      oc apply -f ${SYSTEM_DEFAULTWORKINGDIRECTORY}/openshift/config.yaml -n my-project
