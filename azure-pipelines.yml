@@ -10,10 +10,10 @@ jobs:
     vmImage: 'windows-latest'
   steps:
   # Install oc so that it can be used within a 'script' or bash 'task'
-  - task: oc-setup@2
+  - task: oc-setup
     inputs:
       openshiftService: 'My Openshift'
-      version: '3.11.154'
+      version: '4.7.1'
 # A script task making use of 'oc'
   - script: |
       oc new-project my-project
